@@ -1,0 +1,34 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boateng7-test-redis-deployment
+  labels:
+    username: boateng7
+    env: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: boateng7-test-redis
+  template:
+    metadata:
+      labels:
+        app: boateng7-test-redis
+    spec:
+      containers:
+        - name: redis
+          imagePullPolicy: Always
+          image: redis:7
+          ports:
+          - name: http
+            containerPort: 6379
+          volumeMounts:
+          - name: boateng7-test-redis-pvc
+            mountPath: "/data"
+      volumes:
+        - name:  boateng7-test-redis-pvc
+          persistentVolumeClaim:
+            claimName:  boateng7-test-redis-pvc
+          
+          

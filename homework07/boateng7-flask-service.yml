@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: boateng7-test-flask-service
+spec:
+  type: ClusterIP
+  selector:
+    app: boateng7-test-flask
+  ports:
+  - name: boateng7-test-flask
+    port: 5000
+    targetPort: 5000 

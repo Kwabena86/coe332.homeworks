@@ -1,0 +1,16 @@
+
+---
+ apiVersion: v1
+ kind: PersistentVolumeClaim
+ metadata:
+   name: boateng7-test-redis-pvc
+   labels:
+   username: boateng7
+   env: test
+ spec:
+   accessModes:
+     - ReadWriteOnce
+   storageClassName: cinder-csi
+   resources:
+     requests:
+             storage: 1Gi
