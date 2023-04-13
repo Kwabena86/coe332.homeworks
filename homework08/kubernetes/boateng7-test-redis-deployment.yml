@@ -1,0 +1,37 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boateng7-test-redis-deployment
+  labels:
+    username: boateng7
+    env: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: boateng7-test-redis
+  template:
+    metadata:
+      labels:
+        app: boateng7-test-redis
+    spec:
+      containers:
+        - name: redis
+          imagePullPolicy: Always
+          image: redis:7
+          ports:
+          - name: FLASK_APP
+            value: "gene_api.py"
+          ports:
+          - name: http
+            containerPort: 6379
+          volumeMounts:
+          - name: redis-data
+            mountPath: /data
+      volumes:
+        - name:  redis-data
+          persistentVolumeClaim:
+            claimName:  boateng7-test-redis-pvc
+          
+          
